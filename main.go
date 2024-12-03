@@ -44,7 +44,7 @@ func initWebServer() *gin.Engine {
 		MaxAge: 12 * time.Hour,
 	}))
 
-	store, err := redis.NewStore(16, "tcp", "localhost:6379", "", []byte("gF6eW9fP9yW6mN0yN9zX3oJ0iI4jK2aG"), []byte("tP4qF6gO8oP1yV5nP1vI1nY0vX9hG6jA"))
+	store, err := redis.NewStore(16, "tcp", "webook-redis:6379", "", []byte("gF6eW9fP9yW6mN0yN9zX3oJ0iI4jK2aG"), []byte("tP4qF6gO8oP1yV5nP1vI1nY0vX9hG6jA"))
 	if err != nil {
 		panic(err)
 	}
@@ -62,7 +62,7 @@ func initUser(db *gorm.DB) *web.UserHandler {
 	return u
 }
 func initDB() *gorm.DB {
-	db, err := gorm.Open(mysql.Open("root:root@tcp(localhost:13316)/webook"))
+	db, err := gorm.Open(mysql.Open("root:root@tcp(webook-mysql:13316)/webook"))
 	if err != nil {
 		panic("failed to connect database")
 	}
